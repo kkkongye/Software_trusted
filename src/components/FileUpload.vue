@@ -44,9 +44,9 @@ const uploadFile = async () => {
 .file-upload {
   border: 1px solid #ccc;
   padding: 10px;
-  margin: 10px;
-  width: 220px; /* 固定宽度 */
-  height: 300px; /* 固定高度 */
+  margin: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 内容靠左对齐 */
@@ -54,6 +54,7 @@ const uploadFile = async () => {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative; /* 为标题定位提供参考 */
+  box-sizing: border-box;
 }
 
 .file-upload h3 {

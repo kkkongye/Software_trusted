@@ -68,15 +68,16 @@ const emit = defineEmits(['update-vulnerabilities']);
 .type-selection {
   border: 1px solid #ccc;
   padding: 15px;
-  margin: 10px;
+  margin: 0;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 300px; /* 固定宽度 */
-  height: 150px; /* 固定高度 */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* 内容均匀分布 */
+  box-sizing: border-box;
 }
 
 .type-selection h3 {

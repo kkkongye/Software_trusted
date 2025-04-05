@@ -1,19 +1,29 @@
 <template>
   <div class="main-page">
-    <!-- 左列 -->
-    <div class="left-column">
-      <FileUpload />
-      <TypeSelection />
+    <!-- 左列 - 文件上传和类型选择 -->
+    <div class="column left-column">
+      <div class="column-content">
+        <div class="file-upload-container">
+          <FileUpload />
+        </div>
+        <div class="type-selection-container">
+          <TypeSelection />
+        </div>
+      </div>
     </div>
 
-    <!-- 中间列 -->
-    <div class="middle-column">
-      <SBOMList />
+    <!-- 中间列 - SBOM清单 -->
+    <div class="column middle-column">
+      <div class="column-content">
+        <SBOMList />
+      </div>
     </div>
 
-    <!-- 右列 -->
-    <div class="right-column">
-      <SoftwareIdentifier />
+    <!-- 右列 - 软件标识管理 -->
+    <div class="column right-column">
+      <div class="column-content">
+        <SoftwareIdentifier />
+      </div>
     </div>
   </div>
 </template>
@@ -30,32 +40,45 @@ import SoftwareIdentifier from './SoftwareIdentifier.vue';
 .main-page {
   display: grid;
   grid-template-columns: 1.2fr 1.4fr 1fr; /* 三列布局，中间列宽度是左列和右列的两倍 */
-  grid-template-rows: 1fr; /* 单行，高度占满页面 */
-  gap: 0px; /* 列间距 */
+  gap: 10px; /* 减小列间距 */
   height: calc(100vh - 60px); /* 占满整个页面高度，减去导航栏的高度 */
   width: 100vw;
-  padding: 1px; /* 页面内边距 */
+  padding: 20px 20px 20px 10px; /* 上右下左内边距，左边只有10px */
   background-color: #f0f0f0; /* 页面背景颜色 */
-  overflow: auto; /* 页面内容超出时显示滚动条 */
+  box-sizing: border-box;
 }
 
-.left-column {
+.column {
+  box-sizing: border-box;
+}
+
+.column-content {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5px; /* 左列内部模块间距 */
-  min-height: 0; /* 允许内容超出时滚动 */
 }
 
+.left-column .column-content {
+  gap: 20px; /* 文件上传和类型选择之间的间距 */
+}
+
+.file-upload-container {
+  flex: 1; /* 文件上传占据左列的一半空间 */
+}
+
+.type-selection-container {
+  flex: 1; /* 类型选择占据左列的一半空间 */
+}
+
+/* 左列特殊样式 */
+.left-column {
+  padding-left: 0; /* 移除左侧内边距 */
+  padding-right: 0; /* 减少右侧内边距 */
+}
+
+/* 中间列特殊样式 */
 .middle-column {
-  flex: 2; /* SBOM清单模块占中间列 */
-  margin-bottom: 20px;
-  min-height: 0; /* 允许内容超出时滚动 */
-}
-
-.right-column {
-  flex: 1; /* 软件标识管理模块占右列 */
-  margin-bottom: 20px;
-  min-height: 0; /* 允许内容超出时滚动 */
+  padding-left: 0; /* 移除左侧内边距 */
 }
 
 /* 通用块样式 */
@@ -70,5 +93,7 @@ import SoftwareIdentifier from './SoftwareIdentifier.vue';
   padding: 15px; /* 内边距 */
   overflow: auto; /* 内容超出时显示滚动条 */
   height: 100%; /* 占满父容器高度 */
+  width: 100%; /* 占满父容器宽度 */
+  box-sizing: border-box;
 }
 </style>
