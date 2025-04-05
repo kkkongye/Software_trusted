@@ -2,13 +2,8 @@
   <div class="main-page">
     <!-- 左列 -->
     <div class="left-column">
-      <div class="top-left">
-        <FileUpload />
-        <TypeSelection />
-      </div>
-      <div class="bottom-left">
-        <VulnerabilityList />
-      </div>
+      <FileUpload />
+      <TypeSelection />
     </div>
 
     <!-- 中间列 -->
@@ -37,7 +32,7 @@ import SoftwareIdentifier from './SoftwareIdentifier.vue';
   grid-template-columns: 1.2fr 1.4fr 1fr; /* 三列布局，中间列宽度是左列和右列的两倍 */
   grid-template-rows: 1fr; /* 单行，高度占满页面 */
   gap: 0px; /* 列间距 */
-  height: 100vh; /* 占满整个页面高度 */
+  height: calc(100vh - 60px); /* 占满整个页面高度，减去导航栏的高度 */
   width: 100vw;
   padding: 1px; /* 页面内边距 */
   background-color: #f0f0f0; /* 页面背景颜色 */
@@ -48,20 +43,6 @@ import SoftwareIdentifier from './SoftwareIdentifier.vue';
   display: flex;
   flex-direction: column;
   gap: 5px; /* 左列内部模块间距 */
-  min-height: 0; /* 允许内容超出时滚动 */
-}
-
-.top-left {
-  display: flex;
-  gap: 0px; /* 缩小文件上传和类型选择模块之间的间距 */
-  height: 270px; /* 设置固定高度 */
-  min-height: 0; /* 允许内容超出时滚动 */
-  margin-bottom: 10px;
-}
-
-.bottom-left {
-  flex: 1; /* 漏洞清单模块占满左列剩余空间 */
-  margin-bottom: 20px;
   min-height: 0; /* 允许内容超出时滚动 */
 }
 

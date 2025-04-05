@@ -3,6 +3,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import Antd from 'ant-design-vue';
 import App from './App.vue';
+import router from './router'; // 导入路由
 import 'ant-design-vue/dist/reset.css';
 import * as echarts from 'echarts';
 import axios from 'axios';
@@ -25,5 +26,5 @@ app.config.globalProperties.$echarts = echarts;
 //   timeout: 5000,
 // });
 
-// 挂载 Pinia、Antd 和 Element Plus 插件
-app.use(pinia).use(Antd).use(ElementPlus).mount('#app');
+// 挂载 Pinia、Antd 和 Element Plus 插件以及路由
+app.use(pinia).use(Antd).use(ElementPlus).use(router).mount('#app');

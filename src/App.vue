@@ -1,10 +1,8 @@
 <template>
   <div class="background">
     <div class="view-container">
-      <!-- <DataOverview class="DataOverview-card" /> -->
-      <!-- <LeftButton class="LeftButton-card" /> -->
-      <MainPage class="LeftButton-card" />
-     </div>
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -14,24 +12,10 @@ import { defineComponent } from 'vue';
 
 // import DataOverview from '@/components/DataOverview.vue';
 // import LeftButton from '@/components/LeftButton.vue';
-import MainPage from '@/components/MainPage.vue';
-
-
-
-
+// import MainPage from '@/components/MainPage.vue';
 
 // 使用 defineComponent 在组合式 API 中定义组件
-
-defineComponent({
-  components: {
-
-    // DataOverview,
-    // LeftButton,
-    MainPage
-    // 'a-card': Card,
-
-  },
-});
+defineComponent({});
 </script>
 
 <style scoped>
@@ -46,25 +30,13 @@ defineComponent({
   /* 允许滚动以防止内容溢出 */
 }
 
-
-
-
-
 .view-container {
   background-color: #fff;
-  display: grid;
-  grid-template-rows: repeat(7, 1fr);
-  grid-template-columns: repeat(12, 1fr);
-  gap: 2px;
+  width: 100vw;
+  height: 100vh;
   border: 2px solid #efefef;
   border-radius: 8px;
   box-sizing: border-box;
-  justify-items: center;
-  /* 水平居中网格单元内容 */
-  align-items: center;
-  /* 垂直居中网格单元内容 */
-  width: 100vw;
-  height: 100vh;
   overflow: hidden;
   /* 防止内容溢出 */
 }
@@ -82,7 +54,6 @@ defineComponent({
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
 }
 
-
 /* 确保子组件填满网格单元但不被拉伸 */
 .DataOverview-card{
   width: 100%;
@@ -92,6 +63,4 @@ defineComponent({
   overflow: hidden;
   /* 允许内部滚动以避免内容溢出 */
 }
-
-
 </style>
