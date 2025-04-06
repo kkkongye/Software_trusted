@@ -116,17 +116,50 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
+
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f0f0;
-  background-color: #f8f8f8;
-  background-image: none;
+  background: linear-gradient(-45deg, #e8ecf2, #dde5f0, #e0e6f0, #f0f3f8);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   padding: 20px;
+  position: relative;
 }
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 .login-content {
   display: flex;
