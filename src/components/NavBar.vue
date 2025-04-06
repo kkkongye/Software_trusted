@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <div class="logo">
+      <img src="@/assets/logo.jpg" alt="系统logo" class="nav-logo-img"/>
       <h1>软件可信认证系统</h1>
     </div>
     <div class="nav-links">
@@ -163,5 +164,18 @@ const handleLogout = () => {
 
 .dropdown-item:hover {
   background-color: #f5f5f5;
+}
+
+.nav-logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
 }
 </style> 

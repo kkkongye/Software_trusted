@@ -2,11 +2,11 @@
   <div class="login-container">
     <div class="login-content">
       <div class="login-logo">
-          <div class="logo-image">
-            <img src="@/assets/logo.jpg" alt="系统logo" class="logo-img"/>
-          </div>
-          <h2>软件可信认证系统</h2>
-          <p class="tagline">安全、可靠的软件信任管理平台</p>
+        <div class="logo-circle">
+          <h1>STS</h1>
+        </div>
+        <h2>软件可信认证系统</h2>
+        <p class="tagline">安全、可靠的软件信任管理平台</p>
       </div>
       <div class="login-form">
         <h3>用户登录</h3>
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="login-footer">
-      <p>软件可信认证系统</p>
+      <p>© 2023 软件可信认证系统 版权所有</p>
     </div>
   </div>
 </template>
@@ -152,19 +152,27 @@ const handleLogin = async () => {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.logo-image {
+.logo-circle {
+  width: 80px;
+  height: 80px;
   margin: 0 auto 20px;
+  background: linear-gradient(135deg, #444444, #222222);
+  background: linear-gradient(135deg, #999999, #777777);
+  border-radius: 50%;
   display: flex;
+  align-items: center;
   justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.logo-img {
-  width: 110px;
-  height: 110px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
+.logo-circle h1 {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+  letter-spacing: 1px;
 }
+
 .login-logo h2 {
   margin: 0;
   font-size: 22px;
