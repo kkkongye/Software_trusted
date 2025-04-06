@@ -1,14 +1,21 @@
 <template>
   <div class="background">
-    <div class="view-container">
+    <!-- 只在非登录页面显示导航栏 -->
+    <NavBar v-if="!isLoginPage" />
+    <div class="view-container" :class="{ 'with-navbar': !isLoginPage }">
       <router-view />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { defineComponent } from 'vue';
+import NavBar from './components/NavBar.vue';
+
+const route = useRoute();
+const isLoginPage = computed(() => route.name === 'Login');
 
 // import DataOverview from '@/components/DataOverview.vue';
 // import LeftButton from '@/components/LeftButton.vue';
@@ -21,8 +28,7 @@ defineComponent({});
 <style scoped>
 .background {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   background-color: #efefef;
@@ -39,6 +45,11 @@ defineComponent({});
   box-sizing: border-box;
   overflow: hidden;
   /* 防止内容溢出 */
+}
+
+/* 添加导航栏后的视图容器调整 */
+.view-container.with-navbar {
+  height: calc(100vh - 60px);
 }
 
 /* 默认组件样式 */
