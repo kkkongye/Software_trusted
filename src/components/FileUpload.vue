@@ -91,6 +91,7 @@ const generatevul = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -102,6 +103,7 @@ const generatevul = () => {
   font-size: 18px;
   color: #2c3e50;
   font-weight: 500;
+  text-align: center;
 }
 
 .content-container {
@@ -116,13 +118,16 @@ const generatevul = () => {
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .custom-file-upload {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 16px;
   background-color: #007bff;
@@ -133,6 +138,7 @@ const generatevul = () => {
   font-size: 14px;
   font-weight: 500;
   transition: all 0.3s ease;
+  min-width: 120px;
 }
 
 .custom-file-upload:hover {
@@ -158,6 +164,7 @@ const generatevul = () => {
   font-size: 14px;
   font-weight: 500;
   transition: all 0.3s ease;
+  min-width: 120px;
 }
 
 .upload-button:hover {
@@ -171,6 +178,8 @@ const generatevul = () => {
   background-color: #f8f9fa;
   border-radius: 4px;
   border: 1px solid #e9ecef;
+  width: 100%;
+  text-align: center;
 }
 
 .file-name, .file-status {
@@ -191,6 +200,8 @@ const generatevul = () => {
 
 .select-container {
   margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .select-container label {
@@ -199,6 +210,7 @@ const generatevul = () => {
   font-size: 14px;
   color: #495057;
   font-weight: 500;
+  text-align: center;
 }
 
 .styled-select {
@@ -211,6 +223,7 @@ const generatevul = () => {
   color: #495057;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .styled-select:hover {
@@ -225,6 +238,7 @@ const generatevul = () => {
 
 .generate-button {
   width: 100%;
+  max-width: 300px;
   padding: 10px;
   background-color: #17a2b8;
   color: white;

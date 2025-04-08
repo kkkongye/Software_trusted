@@ -36,9 +36,11 @@ import VulnerabilityList from './VulnerabilityList.vue';
 import SBOMList from './SBOMList.vue';
 
 const vulnerabilityData = ref({
+  critical: 0,
   high: 0,
   medium: 0,
-  low: 0
+  low: 0,
+  unknown: 0
 });
 </script>
 
