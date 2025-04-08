@@ -1,13 +1,13 @@
 <template>
   <div class="main-page">
-    <!-- 左列 - 文件上传和类型选择 -->
+    <!-- 左列 - 文件上传和漏洞图表 -->
     <div class="column left-column">
       <div class="column-content">
         <div class="file-upload-container">
           <FileUpload />
         </div>
-        <div class="type-selection-container">
-          <TypeSelection />
+        <div class="vulnerability-chart-container">
+          <VulnerabilityChart :data="vulnerabilityData" />
         </div>
       </div>
     </div>
@@ -19,21 +19,27 @@
       </div>
     </div>
 
-    <!-- 右列 - 软件标识管理 -->
+    <!-- 右列 - 漏洞清单信息 -->
     <div class="column right-column">
       <div class="column-content">
-        <SoftwareIdentifier />
+        <VulnerabilityList />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import FileUpload from './FileUpload.vue';
-import TypeSelection from './TypeSelection.vue';
+import VulnerabilityChart from './VulnerabilityChart.vue';
 import VulnerabilityList from './VulnerabilityList.vue';
 import SBOMList from './SBOMList.vue';
-import SoftwareIdentifier from './SoftwareIdentifier.vue';
+
+const vulnerabilityData = ref({
+  high: 0,
+  medium: 0,
+  low: 0
+});
 </script>
 
 <style scoped>
@@ -94,6 +100,18 @@ import SoftwareIdentifier from './SoftwareIdentifier.vue';
   overflow: auto; /* 内容超出时显示滚动条 */
   height: 100%; /* 占满父容器高度 */
   width: 100%; /* 占满父容器宽度 */
+  box-sizing: border-box;
+}
+
+.vulnerability-chart-container {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
 }
 </style>

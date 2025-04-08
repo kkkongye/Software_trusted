@@ -6,7 +6,7 @@
     </div>
     <div class="nav-links">
       <router-link to="/" class="nav-link">首页</router-link>
-      <router-link to="/vulnerabilities" class="nav-link">漏洞清单</router-link>
+      <router-link to="/identifier" class="nav-link">软件标识管理</router-link>
     </div>
     <div class="user-section" v-if="isLoggedIn">
       <div class="dropdown">
