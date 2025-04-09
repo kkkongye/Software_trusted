@@ -99,11 +99,12 @@ const generatevul = () => {
 }
 
 .file-upload h3 {
-  margin: 0 0 15px 0;
-  font-size: 18px;
-  color: #2c3e50;
-  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 15px;
   text-align: center;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
 }
 
 .content-container {
