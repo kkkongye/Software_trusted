@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import VulnerabilityPage from '../views/VulnerabilityPage.vue'
 import IdentifierPage from '../views/IdentifierPage.vue'
+import VulnerabilitySettingsPage from '../views/VulnerabilitySettingsPage.vue'
 import MainPage from '../components/MainPage.vue'
 import Login from '../components/Login.vue'
 
@@ -28,6 +29,12 @@ const routes = [
     path: '/identifier',
     name: 'Identifier',
     component: IdentifierPage,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/vulnerability-settings',
+    name: 'VulnerabilitySettings',
+    component: VulnerabilitySettingsPage,
     meta: { requiresAuth: true }
   }
 ]

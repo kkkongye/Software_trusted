@@ -29,18 +29,37 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import FileUpload from './FileUpload.vue';
 import VulnerabilityChart from './VulnerabilityChart.vue';
 import VulnerabilityList from './VulnerabilityList.vue';
 import SBOMList from './SBOMList.vue';
 
-const vulnerabilityData = ref({
-  critical: 0,
-  high: 0,
-  medium: 0,
-  low: 0,
-  unknown: 0
+const defaultVulnerabilityData = {
+  critical: 3,
+  high: 5,
+  medium: 8,
+  low: 12,
+  unknown: 2
+};
+
+const vulnerabilityData = ref({...defaultVulnerabilityData});
+
+// 从本地存储加载漏洞设置
+const loadVulnerabilitySettings = () => {
+  const savedSettings = localStorage.getItem('vulnerabilitySettings');
+  if (savedSettings) {
+    try {
+      const parsedSettings = JSON.parse(savedSettings);
+      vulnerabilityData.value = parsedSettings;
+    } catch (e) {
+      console.error('Failed to parse saved vulnerability settings', e);
+    }
+  }
+};
+
+onMounted(() => {
+  loadVulnerabilitySettings();
 });
 </script>
 
