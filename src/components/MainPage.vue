@@ -4,7 +4,7 @@
     <div class="column left-column">
       <div class="column-content">
         <div class="file-upload-container">
-          <FileUpload />
+          <FileUpload ref="fileUploadRef" @vulnerabilityDataUpdated="updateVulnerabilityData" />
         </div>
         <div class="vulnerability-chart-container">
           <VulnerabilityChart :data="vulnerabilityData" />
@@ -44,6 +44,7 @@ const defaultVulnerabilityData = {
 };
 
 const vulnerabilityData = ref({...defaultVulnerabilityData});
+const fileUploadRef = ref(null);
 
 // 从本地存储加载漏洞设置
 const loadVulnerabilitySettings = () => {
@@ -55,6 +56,15 @@ const loadVulnerabilitySettings = () => {
     } catch (e) {
       console.error('Failed to parse saved vulnerability settings', e);
     }
+  }
+};
+
+// 处理FileUpload组件发出的漏洞数据更新事件
+const updateVulnerabilityData = (newData) => {
+  // 只有在实际有漏洞数据时才更新
+  const hasData = Object.values(newData).some(val => val > 0);
+  if (hasData) {
+    vulnerabilityData.value = { ...newData };
   }
 };
 
