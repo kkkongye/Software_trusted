@@ -26,9 +26,10 @@
             :cell-style="{textAlign: 'center'}"
             :header-cell-style="{textAlign: 'center', backgroundColor: '#f5f7fa'}"
           >
-            <el-table-column prop="name" label="软件名" :width="tableColumnWidth" />
+            <el-table-column prop="pkg" label="软件包" :width="tableColumnWidth" />
+            <el-table-column prop="version" label="版本" :width="tableColumnWidth" />
             <el-table-column prop="id" label="标识ID" :width="tableColumnWidth" />
-            <el-table-column prop="version" label="具体信息" :width="tableColumnWidth" />
+            <el-table-column prop="sbomURL" label="SBOM链接" :width="tableColumnWidth" />
           </el-table>
         </div>
       </div>
@@ -48,9 +49,10 @@
         <div class="search-result" v-if="searchResultVisible">
           <div v-if="searchResultData">
             <h4>搜索结果：</h4>
-            <p><strong>软件名：</strong> {{ searchResultData.name }}</p>
+            <p><strong>软件名：</strong> {{ searchResultData.pkg }}</p>
+            <p><strong>版本：</strong> {{ searchResultData.version }}</p>
             <p><strong>标识ID：</strong> {{ searchResultData.id }}</p>
-            <p><strong>具体信息：</strong> {{ searchResultData.version }}</p>
+            <p><strong>SBOM链接：</strong> {{ searchResultData.sbomURL }}</p>
           </div>
           <div v-else class="no-result">
             未找到匹配结果
@@ -81,24 +83,69 @@ const searchResultData = ref(null);
 
 // 计算每列宽度
 const tableColumnWidth = computed(() => {
-  return 'calc(100% / 3)';
+  return 'calc(100% / 4)';
 });
 
 const tableData = ref([
   {
-    name: '新软件_001',
-    id: 'id_0i2om',
-    version: '1.0.0'
+    "pkg": "lodash",
+    "version": "4.17.21",
+    "id": "did:key:z6MkiLodashDIDExample123",
+    "sbomURL": "https://example.com/sboms/lodash-4.17.21.spdx.json"
   },
   {
-    name: '新软件_056',
-    id: 'id_9ierw',
-    version: '2.1.0'
+    "pkg": "react",
+    "version": "18.2.0",
+    "id": "did:key:z6MkReactDIDexample456",
+    "sbomURL": "https://example.com/sboms/react-18.2.0.spdx.json"
   },
   {
-    name: '新软件_327',
-    id: 'id_75fyb',
-    version: '3.0.1'
+    "pkg": "axios",
+    "version": "1.6.2",
+    "id": "did:key:z6MkAxiosKeyExample789",
+    "sbomURL": "https://example.com/sboms/axios-1.6.2.spdx.json"
+  },
+  {
+    "pkg": "express",
+    "version": "4.18.2",
+    "id": "did:key:z6MkExpressDID123456",
+    "sbomURL": "https://example.com/sboms/express-4.18.2.spdx.json"
+  },
+  {
+    "pkg": "webpack",
+    "version": "5.89.0",
+    "id": "did:key:z6MkWebpackKeyDID789",
+    "sbomURL": "https://example.com/sboms/webpack-5.89.0.spdx.json"
+  },
+  {
+    "pkg": "vue",
+    "version": "3.4.0",
+    "id": "did:key:z6MkVueKeyDID345",
+    "sbomURL": "https://example.com/sboms/vue-3.4.0.spdx.json"
+  },
+  {
+    "pkg": "typescript",
+    "version": "5.3.3",
+    "id": "did:key:z6MkTSKeyDID654",
+    "sbomURL": "https://example.com/sboms/typescript-5.3.3.spdx.json"
+  },
+  {
+    "pkg": "mongodb",
+    "version": "6.0.5",
+    "id": "did:key:z6MkMongoDID123321",
+    "sbomURL": "https://example.com/sboms/mongodb-6.0.5.spdx.json"
+  },
+  {
+    "pkg": "nginx",
+    "version": "1.25.3",
+    "id": "did:key:z6MkNginxKey987",
+    "sbomURL": "https://example.com/sboms/nginx-1.25.3.spdx.json"
+  },
+  {
+    "pkg": "ubuntu",
+    "version": "22.04",
+    "id": "did:key:z6MkUbuntuKeyDID321",
+    "sbomURL": "https://example.com/sboms/ubuntu-22.04.spdx.json"
   }
 ]);
 
@@ -117,7 +164,7 @@ const performSearch = () => {
   const keyword = searchKeyword.value.toLowerCase();
   const result = tableData.value.find(
     item => 
-      item.name.toLowerCase().includes(keyword) || 
+      item.pkg.toLowerCase().includes(keyword) || 
       item.id.toLowerCase().includes(keyword)
   );
 
@@ -127,9 +174,10 @@ const performSearch = () => {
 
 const issueIdentifier = () => {
   const newSoftware = {
-    name: '新软件_' + Math.floor(Math.random() * 1000),
-    id: 'id_' + Math.random().toString(36).substr(2, 5),
-    version: '1.0.' + Math.floor(Math.random() * 10)
+    pkg: 'new-package_' + Math.floor(Math.random() * 1000),
+    version: '1.0.' + Math.floor(Math.random() * 10),
+    id: 'did:key:z6Mk' + Math.random().toString(36).substring(2, 10),
+    sbomURL: 'https://example.com/sboms/new-package.spdx.json'
   };
   tableData.value.push(newSoftware);
   alert('已颁发新标识');
