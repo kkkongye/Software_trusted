@@ -5,19 +5,33 @@
         <div v-if="loading" class="loading">
           <p>加载中...</p>
         </div>
-        <div v-else-if="!currentSbomFile" class="empty-state">
-          <p>暂无SBOM清单。请先上传软件包并生成SBOM清单。</p>
+        <div v-else-if="!sbomGenerated || !currentSbomFile" class="empty-state">
+          <p>暂无SBOM清单</p>
+          <div class="instruction">
+            请先上传软件包，然后点击"生成SBOM清单"按钮进行软件物料清单生成。
+          </div>
         </div>
         <div v-else class="sbom-details">
           <h4>SBOM文件信息</h4>
           <p>文件名: {{ currentSbomFile }}</p>
-          <button class="view-btn" @click="loadSbomDetails">查看详情</button>
           
-          <div v-if="sbomDetails" class="details-container">
+          <button class="view-btn" @click="showDetailList = !showDetailList">
+            {{ showDetailList ? '隐藏详情' : '查看详情' }}
+          </button>
+          
+          <div v-if="showDetailList" class="details-container">
             <h5>软件包依赖列表</h5>
             <ul class="packages-list">
-              <li v-for="(pkg, index) in sbomDetails.packages" :key="index">
-                <strong>{{ pkg.name }}</strong> - 版本: {{ pkg.version }}
+              <li v-for="(pkg, index) in sbomDetails?.packages || []" :key="index" 
+                  class="package-item">
+                <div class="package-header" @click="togglePackageDetails(index)">
+                  <span><strong>{{ pkg.name }}</strong> - 版本: {{ pkg.version }}</span>
+                  <span class="toggle-icon">{{ expandedPackages[index] ? '▼' : '▶' }}</span>
+                </div>
+                <div v-if="expandedPackages[index]" class="package-expanded-details">
+                  <div><strong>名称:</strong> {{ pkg.name }}</div>
+                  <div><strong>版本:</strong> {{ pkg.version }}</div>
+                </div>
               </li>
             </ul>
           </div>
@@ -28,23 +42,53 @@
   
   <script setup>
   import { ref, onMounted } from 'vue';
+  import apiService from '../api';
   
   const loading = ref(false);
   const currentSbomFile = ref('');
   const sbomDetails = ref(null);
+  const sbomGenerated = ref(false);
+  const showDetailList = ref(false);
+  const expandedPackages = ref({});
+  
+  // 切换包详情的展开/折叠状态
+  const togglePackageDetails = (index) => {
+    expandedPackages.value = {
+      ...expandedPackages.value,
+      [index]: !expandedPackages.value[index]
+    };
+  };
   
   // 监听LocalStorage变化
   const handleStorageChange = (event) => {
     if (event.key === 'currentSBOMFile') {
-      currentSbomFile.value = event.newValue;
+      if (event.newValue && event.newValue.trim() !== '') {
+        sbomGenerated.value = true;
+        localStorage.setItem('sbomGenerated', 'true');
+        currentSbomFile.value = event.newValue;
+        loadSbomDetails(); // 加载SBOM详情
+      } else {
+        sbomGenerated.value = false;
+        localStorage.setItem('sbomGenerated', 'false');
+        currentSbomFile.value = '';
+      }
+    } else if (event.key === 'sbomGenerated') {
+      sbomGenerated.value = event.newValue === 'true';
     }
   };
   
   // 从LocalStorage获取当前SBOM文件
   const loadCurrentSbomFile = () => {
     const storedFile = localStorage.getItem('currentSBOMFile');
-    if (storedFile) {
+    if (storedFile && storedFile.trim() !== '') {
+      sbomGenerated.value = true;
+      localStorage.setItem('sbomGenerated', 'true');
       currentSbomFile.value = storedFile;
+    } else {
+      localStorage.removeItem('currentSBOMFile');
+      localStorage.setItem('sbomGenerated', 'false');
+      sbomGenerated.value = false;
+      currentSbomFile.value = '';
     }
   };
   
@@ -54,33 +98,38 @@
     
     loading.value = true;
     try {
-      // 模拟API调用，实际项目中应从后端获取SBOM详情
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // 使用API服务获取SBOM详情
+      console.log('正在请求SBOM详情，文件名:', currentSbomFile.value);
+      const response = await apiService.getSBOMDetails(currentSbomFile.value);
+      console.log('SBOM详情响应数据:', response.data);
+      sbomDetails.value = response.data;
       
-      // 模拟SBOM详情数据
-      sbomDetails.value = {
-        name: currentSbomFile.value.split('_')[0] + ' SBOM',
-        format: currentSbomFile.value.includes('_spdx_') ? 'SPDX' : 
-                currentSbomFile.value.includes('_cdx_') ? 'CDX' : 'SWID',
-        created: new Date().toLocaleString(),
-        packages: [
-          { name: "example-package-1", version: "1.0.0" },
-          { name: "example-package-2", version: "2.3.1" },
-          { name: "example-package-3", version: "0.9.5" },
-          { name: "react", version: "17.0.2" },
-          { name: "lodash", version: "4.17.21" },
-          { name: "axios", version: "0.24.0" }
-        ]
-      };
+      // 检查包是否为空
+      if (!response.data.packages || response.data.packages.length === 0) {
+        console.warn('SBOM详情中没有包信息');
+      }
     } catch (error) {
       console.error('加载SBOM详情失败:', error);
+      console.error('错误详情:', error.response ? error.response.data : '无响应数据');
+      // 错误处理，例如显示错误消息
+      sbomDetails.value = {
+        name: '加载失败',
+        packages: []
+      };
     } finally {
       loading.value = false;
     }
   };
   
   onMounted(() => {
-    loadCurrentSbomFile();
+    const generated = localStorage.getItem('sbomGenerated') === 'true';
+    sbomGenerated.value = generated;
+    
+    if (generated) {
+      loadCurrentSbomFile();
+      // 自动加载SBOM详情
+      loadSbomDetails();
+    }
     window.addEventListener('storage', handleStorageChange);
   });
   </script>
@@ -110,6 +159,8 @@
   .content {
     flex: 1;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
   }
   
   .empty-state, .loading {
@@ -119,10 +170,31 @@
     height: 100%;
     color: #888;
     font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    flex-direction: column;
+  }
+  
+  .empty-state p {
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  
+  .empty-state .instruction {
+    font-style: normal;
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+    text-align: center;
+    max-width: 80%;
   }
   
   .sbom-details {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
   }
   
   h4, h5 {
@@ -149,20 +221,51 @@
     margin-top: 15px;
     border-top: 1px solid #eee;
     padding-top: 10px;
+    flex: 1;
+    min-height: 200px;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
   }
   
   .packages-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    max-width: 100%;
   }
   
-  .packages-list li {
-    padding: 5px 0;
-    border-bottom: 1px dotted #eee;
+  .package-item {
+    padding: 8px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 5px;
   }
   
-  .packages-list li:last-child {
-    border-bottom: none;
+  .package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 3px 0;
+  }
+  
+  .toggle-icon {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .package-expanded-details {
+    margin-top: 8px;
+    padding: 8px;
+    background-color: rgba(249, 249, 249, 0.8);
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  .package-expanded-details div {
+    margin-bottom: 5px;
   }
   </style>

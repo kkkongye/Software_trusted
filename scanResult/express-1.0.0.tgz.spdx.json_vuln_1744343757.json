@@ -1,0 +1,214 @@
+{
+  "severity_summary": {
+    "CRITICAL": 1,
+    "HIGH": 7,
+    "MEDIUM": 5,
+    "LOW": 13,
+    "UNKNOWN": 3
+  },
+  "vulnerabilities": [
+    {
+      "id": "CVE-2023-1000",
+      "package_name": "angular",
+      "severity": "CRITICAL",
+      "description": "远程代码执行漏洞，可能导致系统完全被控制",
+      "cvss_score": 9.7
+    },
+    {
+      "id": "CVE-2023-2000",
+      "package_name": "react",
+      "severity": "HIGH",
+      "description": "配置错误漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.5
+    },
+    {
+      "id": "CVE-2023-2001",
+      "package_name": "vue",
+      "severity": "HIGH",
+      "description": "缓冲区溢出漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.8
+    },
+    {
+      "id": "CVE-2023-2002",
+      "package_name": "vue",
+      "severity": "HIGH",
+      "description": "SQL注入漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.6
+    },
+    {
+      "id": "CVE-2023-2003",
+      "package_name": "webpack",
+      "severity": "HIGH",
+      "description": "跨站脚本攻击漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.3
+    },
+    {
+      "id": "CVE-2023-2004",
+      "package_name": "webpack",
+      "severity": "HIGH",
+      "description": "SQL注入漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.6
+    },
+    {
+      "id": "CVE-2023-2005",
+      "package_name": "webpack",
+      "severity": "HIGH",
+      "description": "信息泄露漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.1
+    },
+    {
+      "id": "CVE-2023-2006",
+      "package_name": "angular",
+      "severity": "HIGH",
+      "description": "权限提升漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.1
+    },
+    {
+      "id": "CVE-2023-3000",
+      "package_name": "express",
+      "severity": "MEDIUM",
+      "description": "内存泄漏漏洞，需要一定条件才能利用",
+      "cvss_score": 6.5
+    },
+    {
+      "id": "CVE-2023-3001",
+      "package_name": "angular",
+      "severity": "MEDIUM",
+      "description": "SQL注入漏洞，需要一定条件才能利用",
+      "cvss_score": 5.2
+    },
+    {
+      "id": "CVE-2023-3002",
+      "package_name": "webpack",
+      "severity": "MEDIUM",
+      "description": "信息泄露漏洞，需要一定条件才能利用",
+      "cvss_score": 4.8
+    },
+    {
+      "id": "CVE-2023-3003",
+      "package_name": "angular",
+      "severity": "MEDIUM",
+      "description": "缓冲区溢出漏洞，需要一定条件才能利用",
+      "cvss_score": 5.8
+    },
+    {
+      "id": "CVE-2023-3004",
+      "package_name": "axios",
+      "severity": "MEDIUM",
+      "description": "权限提升漏洞，需要一定条件才能利用",
+      "cvss_score": 6.2
+    },
+    {
+      "id": "CVE-2023-4000",
+      "package_name": "moment",
+      "severity": "LOW",
+      "description": "配置错误漏洞，安全风险较小",
+      "cvss_score": 3.7
+    },
+    {
+      "id": "CVE-2023-4001",
+      "package_name": "express",
+      "severity": "LOW",
+      "description": "配置错误漏洞，安全风险较小",
+      "cvss_score": 2.8
+    },
+    {
+      "id": "CVE-2023-4002",
+      "package_name": "webpack",
+      "severity": "LOW",
+      "description": "SQL注入漏洞，安全风险较小",
+      "cvss_score": 0.9
+    },
+    {
+      "id": "CVE-2023-4003",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "拒绝服务漏洞，安全风险较小",
+      "cvss_score": 0.8
+    },
+    {
+      "id": "CVE-2023-4004",
+      "package_name": "lodash",
+      "severity": "LOW",
+      "description": "权限提升漏洞，安全风险较小",
+      "cvss_score": 2.2
+    },
+    {
+      "id": "CVE-2023-4005",
+      "package_name": "vue",
+      "severity": "LOW",
+      "description": "配置错误漏洞，安全风险较小",
+      "cvss_score": 3.0
+    },
+    {
+      "id": "CVE-2023-4006",
+      "package_name": "axios",
+      "severity": "LOW",
+      "description": "中间人攻击漏洞，安全风险较小",
+      "cvss_score": 1.7
+    },
+    {
+      "id": "CVE-2023-4007",
+      "package_name": "lodash",
+      "severity": "LOW",
+      "description": "缓冲区溢出漏洞，安全风险较小",
+      "cvss_score": 1.7
+    },
+    {
+      "id": "CVE-2023-4008",
+      "package_name": "express",
+      "severity": "LOW",
+      "description": "SQL注入漏洞，安全风险较小",
+      "cvss_score": 3.6
+    },
+    {
+      "id": "CVE-2023-4009",
+      "package_name": "react",
+      "severity": "LOW",
+      "description": "远程代码执行漏洞，安全风险较小",
+      "cvss_score": 1.1
+    },
+    {
+      "id": "CVE-2023-4010",
+      "package_name": "angular",
+      "severity": "LOW",
+      "description": "远程代码执行漏洞，安全风险较小",
+      "cvss_score": 2.6
+    },
+    {
+      "id": "CVE-2023-4011",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "权限提升漏洞，安全风险较小",
+      "cvss_score": 3.1
+    },
+    {
+      "id": "CVE-2023-4012",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "中间人攻击漏洞，安全风险较小",
+      "cvss_score": 3.6
+    },
+    {
+      "id": "CVE-2023-5000",
+      "package_name": "angular",
+      "severity": "UNKNOWN",
+      "description": "未确定影响范围和严重程度的漏洞",
+      "cvss_score": null
+    },
+    {
+      "id": "CVE-2023-5001",
+      "package_name": "babel",
+      "severity": "UNKNOWN",
+      "description": "未确定影响范围和严重程度的漏洞",
+      "cvss_score": null
+    },
+    {
+      "id": "CVE-2023-5002",
+      "package_name": "webpack",
+      "severity": "UNKNOWN",
+      "description": "未确定影响范围和严重程度的漏洞",
+      "cvss_score": null
+    }
+  ]
+}

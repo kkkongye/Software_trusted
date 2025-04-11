@@ -137,6 +137,9 @@ const generateSBOM = async () => {
     if (response.data && response.data.sbom_file) {
       sbomFile.value = response.data.sbom_file;
       
+      // 设置标志表示已生成SBOM
+      localStorage.setItem('sbomGenerated', 'true');
+      
       // 保存到 localStorage 并触发事件通知其他组件
       localStorage.setItem('currentSBOMFile', response.data.sbom_file);
       window.dispatchEvent(new StorageEvent('storage', {
@@ -181,6 +184,24 @@ const generateVuln = async () => {
           low: summary.LOW || 0,
           unknown: summary.UNKNOWN || 0
         };
+        
+        // 设置标志表示已生成漏洞报告
+        localStorage.setItem('vulnReportGenerated', 'true');
+        
+        // 更新本地存储并触发事件通知
+        localStorage.setItem('vulnerabilitySettings', JSON.stringify(vulnerabilityData.value));
+        window.dispatchEvent(new StorageEvent('storage', {
+          key: 'vulnerabilitySettings',
+          newValue: JSON.stringify(vulnerabilityData.value),
+          url: window.location.href
+        }));
+        
+        // 同时触发vulnReportGenerated事件
+        window.dispatchEvent(new StorageEvent('storage', {
+          key: 'vulnReportGenerated',
+          newValue: 'true',
+          url: window.location.href
+        }));
         
         // 发出事件通知
         emit('vulnerabilityDataUpdated', vulnerabilityData.value);

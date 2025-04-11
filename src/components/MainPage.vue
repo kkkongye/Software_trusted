@@ -36,11 +36,11 @@ import VulnerabilityList from './VulnerabilityList.vue';
 import SBOMList from './SBOMList.vue';
 
 const defaultVulnerabilityData = {
-  critical: 3,
-  high: 5,
-  medium: 8,
-  low: 12,
-  unknown: 2
+  critical: 0,
+  high: 0,
+  medium: 0,
+  low: 0,
+  unknown: 0
 };
 
 const vulnerabilityData = ref({...defaultVulnerabilityData});
@@ -61,22 +61,51 @@ const loadVulnerabilitySettings = () => {
 
 // 处理FileUpload组件发出的漏洞数据更新事件
 const updateVulnerabilityData = (newData) => {
-  // 只有在实际有漏洞数据时才更新
-  const hasData = Object.values(newData).some(val => val > 0);
-  if (hasData) {
-    vulnerabilityData.value = { ...newData };
+  // 直接更新漏洞数据，不再检查是否为0
+  vulnerabilityData.value = { ...newData };
+  
+  // 保存到本地存储
+  try {
+    localStorage.setItem('vulnerabilitySettings', JSON.stringify(newData));
+    
+    // 确保所有组件都能感知到变化
+    if (Object.values(newData).some(val => val > 0)) {
+      localStorage.setItem('vulnReportGenerated', 'true');
+      
+      // 触发事件，确保其他组件更新
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: 'vulnerabilitySettings',
+        newValue: JSON.stringify(newData),
+        url: window.location.href
+      }));
+      
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: 'vulnReportGenerated',
+        newValue: 'true',
+        url: window.location.href
+      }));
+    }
+  } catch (e) {
+    console.error('Failed to save vulnerability settings', e);
   }
 };
 
 onMounted(() => {
-  loadVulnerabilitySettings();
+  // 清除之前的状态，确保每次页面加载都是新的状态
+  localStorage.removeItem('vulnReportGenerated');
+  localStorage.removeItem('sbomGenerated');
+  localStorage.removeItem('currentSBOMFile');
+  localStorage.removeItem('vulnerabilitySettings');
+  
+  // 重置数据
+  vulnerabilityData.value = {...defaultVulnerabilityData};
 });
 </script>
 
 <style scoped>
 .main-page {
   display: grid;
-  grid-template-columns: 1.2fr 1.4fr 1fr; /* 三列布局，中间列宽度是左列和右列的两倍 */
+  grid-template-columns: 1fr 1fr 1fr; /* 三列布局，三列等宽 */
   gap: 10px; /* 减小列间距 */
   height: calc(100vh - 60px); /* 占满整个页面高度，减去导航栏的高度 */
   width: 100vw;
@@ -144,5 +173,8 @@ onMounted(() => {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: 50vh; /* 限制最大高度为视口高度的50% */
 }
 </style>

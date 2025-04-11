@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import time
+import json
+import glob
 from werkzeug.utils import secure_filename
 
 from sbom_gene import generate_sbom
@@ -14,6 +16,8 @@ UPLOAD_FOLDER = 'test_packages'
 SBOM_FOLDER = 'sboms'
 SCAN_FOLDER = 'scanResult'
 
+# 存储最近的扫描结果
+latest_scan_result = None
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(SBOM_FOLDER, exist_ok=True)
@@ -60,6 +64,8 @@ def generate_sbom_api():
 
 @app.route('/scan_vuln', methods=['POST'])
 def scan_vuln_api():
+    global latest_scan_result
+    
     data = request.json
     sbom_file = data.get('sbom_file')
 
@@ -70,6 +76,8 @@ def scan_vuln_api():
 
     try:
         result, output_path = scan_vulnerabilities(sbom_path)
+        # 保存最近的扫描结果
+        latest_scan_result = result
     except Exception as e:
         return jsonify({'error': '漏洞扫描失败', 'detail': str(e)}), 500
 
@@ -78,8 +86,35 @@ def scan_vuln_api():
         'message': '漏洞扫描完成',
         'vuln_file': download_name,
         'download_url': f'/download/scanResult/{download_name}',
-        'summary': result.get('severity_summary', {})
+        'summary': result.get('severity_summary', {}),
+        'vulnerabilities': result.get('vulnerabilities', [])
     })
+
+
+@app.route('/vulnerabilities', methods=['GET'])
+def get_vulnerabilities():
+    """获取最近的漏洞扫描结果"""
+    global latest_scan_result
+    
+    # 如果有存储的结果，返回它
+    if latest_scan_result:
+        return jsonify(latest_scan_result)
+    
+    # 否则尝试读取最新的扫描结果文件
+    scan_files = glob.glob(os.path.join(SCAN_FOLDER, '*.json'))
+    if not scan_files:
+        return jsonify({'message': '没有可用的漏洞扫描结果'}), 404
+    
+    # 按文件修改时间排序，获取最新的文件
+    latest_file = max(scan_files, key=os.path.getmtime)
+    
+    try:
+        with open(latest_file, 'r', encoding='utf-8') as f:
+            result = json.load(f)
+            latest_scan_result = result  # 缓存结果
+            return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': f'读取漏洞扫描结果失败: {str(e)}'}), 500
 
 
 @app.route('/download/<folder>/<filename>', methods=['GET'])

@@ -1,0 +1,64 @@
+{
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "creationInfo": {
+        "created": "2025-04-11T12:23:15Z",
+        "creators": [
+            "Tool: sbom-generator"
+        ]
+    },
+    "dataLicense": "CC0-1.0",
+    "name": "SBOM for express-1.0.0.tgz",
+    "spdxVersion": "SPDX-2.3",
+    "documentNamespace": "https://sbom.record.com/express-1.0.0.tgz",
+    "packages": [
+        {
+            "SPDXID": "SPDXRef-Package-Main",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "express",
+            "originator": "Organization: ",
+            "supplier": "Organization: ",
+            "versionInfo": "1.0.0"
+        },
+        {
+            "SPDXID": "SPDXRef-express",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "express",
+            "versionInfo": "^4.21.2"
+        },
+        {
+            "SPDXID": "SPDXRef-lodash",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "lodash",
+            "versionInfo": "^4.17.21"
+        }
+    ],
+    "relationships": [
+        {
+            "spdxElementId": "SPDXRef-DOCUMENT",
+            "relatedSpdxElement": "SPDXRef-Package-Main",
+            "relationshipType": "DESCRIBES"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-Main",
+            "relatedSpdxElement": "SPDXRef-express",
+            "relationshipType": "DEPENDS_ON"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-Main",
+            "relatedSpdxElement": "SPDXRef-lodash",
+            "relationshipType": "DEPENDS_ON"
+        }
+    ]
+}

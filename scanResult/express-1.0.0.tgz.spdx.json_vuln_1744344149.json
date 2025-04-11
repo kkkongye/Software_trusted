@@ -1,0 +1,249 @@
+{
+  "severity_summary": {
+    "CRITICAL": 2,
+    "HIGH": 5,
+    "MEDIUM": 9,
+    "LOW": 16,
+    "UNKNOWN": 2
+  },
+  "vulnerabilities": [
+    {
+      "id": "CVE-2023-1000",
+      "package_name": "webpack",
+      "severity": "CRITICAL",
+      "description": "中间人攻击漏洞，可能导致系统完全被控制",
+      "cvss_score": 9.2
+    },
+    {
+      "id": "CVE-2023-1001",
+      "package_name": "express",
+      "severity": "CRITICAL",
+      "description": "跨站脚本攻击漏洞，可能导致系统完全被控制",
+      "cvss_score": 9.2
+    },
+    {
+      "id": "CVE-2023-2000",
+      "package_name": "jquery",
+      "severity": "HIGH",
+      "description": "中间人攻击漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.9
+    },
+    {
+      "id": "CVE-2023-2001",
+      "package_name": "angular",
+      "severity": "HIGH",
+      "description": "跨站脚本攻击漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.0
+    },
+    {
+      "id": "CVE-2023-2002",
+      "package_name": "express",
+      "severity": "HIGH",
+      "description": "内存泄漏漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.8
+    },
+    {
+      "id": "CVE-2023-2003",
+      "package_name": "vue",
+      "severity": "HIGH",
+      "description": "缓冲区溢出漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.9
+    },
+    {
+      "id": "CVE-2023-2004",
+      "package_name": "vue",
+      "severity": "HIGH",
+      "description": "中间人攻击漏洞，可能导致严重的安全问题",
+      "cvss_score": 7.9
+    },
+    {
+      "id": "CVE-2023-3000",
+      "package_name": "jquery",
+      "severity": "MEDIUM",
+      "description": "权限提升漏洞，需要一定条件才能利用",
+      "cvss_score": 6.6
+    },
+    {
+      "id": "CVE-2023-3001",
+      "package_name": "angular",
+      "severity": "MEDIUM",
+      "description": "内存泄漏漏洞，需要一定条件才能利用",
+      "cvss_score": 5.9
+    },
+    {
+      "id": "CVE-2023-3002",
+      "package_name": "react",
+      "severity": "MEDIUM",
+      "description": "远程代码执行漏洞，需要一定条件才能利用",
+      "cvss_score": 4.6
+    },
+    {
+      "id": "CVE-2023-3003",
+      "package_name": "babel",
+      "severity": "MEDIUM",
+      "description": "中间人攻击漏洞，需要一定条件才能利用",
+      "cvss_score": 6.0
+    },
+    {
+      "id": "CVE-2023-3004",
+      "package_name": "vue",
+      "severity": "MEDIUM",
+      "description": "远程代码执行漏洞，需要一定条件才能利用",
+      "cvss_score": 5.8
+    },
+    {
+      "id": "CVE-2023-3005",
+      "package_name": "babel",
+      "severity": "MEDIUM",
+      "description": "SQL注入漏洞，需要一定条件才能利用",
+      "cvss_score": 5.9
+    },
+    {
+      "id": "CVE-2023-3006",
+      "package_name": "axios",
+      "severity": "MEDIUM",
+      "description": "跨站脚本攻击漏洞，需要一定条件才能利用",
+      "cvss_score": 4.0
+    },
+    {
+      "id": "CVE-2023-3007",
+      "package_name": "lodash",
+      "severity": "MEDIUM",
+      "description": "信息泄露漏洞，需要一定条件才能利用",
+      "cvss_score": 5.0
+    },
+    {
+      "id": "CVE-2023-3008",
+      "package_name": "react",
+      "severity": "MEDIUM",
+      "description": "远程代码执行漏洞，需要一定条件才能利用",
+      "cvss_score": 5.5
+    },
+    {
+      "id": "CVE-2023-4000",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "信息泄露漏洞，安全风险较小",
+      "cvss_score": 3.5
+    },
+    {
+      "id": "CVE-2023-4001",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "中间人攻击漏洞，安全风险较小",
+      "cvss_score": 1.0
+    },
+    {
+      "id": "CVE-2023-4002",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "SQL注入漏洞，安全风险较小",
+      "cvss_score": 0.2
+    },
+    {
+      "id": "CVE-2023-4003",
+      "package_name": "moment",
+      "severity": "LOW",
+      "description": "拒绝服务漏洞，安全风险较小",
+      "cvss_score": 3.0
+    },
+    {
+      "id": "CVE-2023-4004",
+      "package_name": "express",
+      "severity": "LOW",
+      "description": "信息泄露漏洞，安全风险较小",
+      "cvss_score": 1.1
+    },
+    {
+      "id": "CVE-2023-4005",
+      "package_name": "babel",
+      "severity": "LOW",
+      "description": "内存泄漏漏洞，安全风险较小",
+      "cvss_score": 2.9
+    },
+    {
+      "id": "CVE-2023-4006",
+      "package_name": "react",
+      "severity": "LOW",
+      "description": "远程代码执行漏洞，安全风险较小",
+      "cvss_score": 3.3
+    },
+    {
+      "id": "CVE-2023-4007",
+      "package_name": "webpack",
+      "severity": "LOW",
+      "description": "远程代码执行漏洞，安全风险较小",
+      "cvss_score": 2.8
+    },
+    {
+      "id": "CVE-2023-4008",
+      "package_name": "react",
+      "severity": "LOW",
+      "description": "权限提升漏洞，安全风险较小",
+      "cvss_score": 1.1
+    },
+    {
+      "id": "CVE-2023-4009",
+      "package_name": "webpack",
+      "severity": "LOW",
+      "description": "信息泄露漏洞，安全风险较小",
+      "cvss_score": 0.6
+    },
+    {
+      "id": "CVE-2023-4010",
+      "package_name": "angular",
+      "severity": "LOW",
+      "description": "权限提升漏洞，安全风险较小",
+      "cvss_score": 2.6
+    },
+    {
+      "id": "CVE-2023-4011",
+      "package_name": "lodash",
+      "severity": "LOW",
+      "description": "内存泄漏漏洞，安全风险较小",
+      "cvss_score": 2.2
+    },
+    {
+      "id": "CVE-2023-4012",
+      "package_name": "jquery",
+      "severity": "LOW",
+      "description": "缓冲区溢出漏洞，安全风险较小",
+      "cvss_score": 1.5
+    },
+    {
+      "id": "CVE-2023-4013",
+      "package_name": "express",
+      "severity": "LOW",
+      "description": "远程代码执行漏洞，安全风险较小",
+      "cvss_score": 3.6
+    },
+    {
+      "id": "CVE-2023-4014",
+      "package_name": "react",
+      "severity": "LOW",
+      "description": "缓冲区溢出漏洞，安全风险较小",
+      "cvss_score": 3.6
+    },
+    {
+      "id": "CVE-2023-4015",
+      "package_name": "angular",
+      "severity": "LOW",
+      "description": "中间人攻击漏洞，安全风险较小",
+      "cvss_score": 0.2
+    },
+    {
+      "id": "CVE-2023-5000",
+      "package_name": "angular",
+      "severity": "UNKNOWN",
+      "description": "未确定影响范围和严重程度的漏洞",
+      "cvss_score": null
+    },
+    {
+      "id": "CVE-2023-5001",
+      "package_name": "moment",
+      "severity": "UNKNOWN",
+      "description": "未确定影响范围和严重程度的漏洞",
+      "cvss_score": null
+    }
+  ]
+}
