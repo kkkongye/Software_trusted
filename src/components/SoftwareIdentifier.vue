@@ -144,7 +144,21 @@ const revokeIdentifier = () => {
   }
 };
 
-const updateKey = () => alert('标识密钥更新');
+const updateKey = () => {
+  // 生成DID格式的key并更新表格数据
+  tableData.value = tableData.value.map(item => {
+    // 生成一个随机字符串作为DID尾部
+    const randomString = Math.random().toString(36).substring(2, 12);
+    // 创建DID格式的ID
+    const didKey = `did:key:z2D${randomString}`;
+    
+    return {
+      ...item,
+      id: didKey
+    };
+  });
+};
+
 const updateDocument = () => alert('更新标识文档');
 </script>
 
